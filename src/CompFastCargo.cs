@@ -111,7 +111,7 @@ namespace SmallVehicleAddons
             }
             catch (Exception ex)
             {
-                Log.Error("[Small Vehicle Addons]: Something went wrong during AddItemsToTheVehicleTransferables. Exception message: " + ex.Message);
+                Log.Error(SmallVehicleAddons_Utility.ExceptionMessage("AddItemsToTheVehicleTransferables", ex.Message + "\n" + ex.StackTrace));
             }
             tmpThings.Clear();
         }

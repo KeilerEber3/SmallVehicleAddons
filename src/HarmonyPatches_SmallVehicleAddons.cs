@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,6 +93,30 @@ namespace SmallVehicleAddons
                         b += Mathf.RoundToInt(Mathf.Max(0f, contribution.b) * 255f);
                     }
                     __result = new Color32((byte)Mathf.Clamp(r, 0, 255), (byte)Mathf.Clamp(g, 0, 255), (byte)Mathf.Clamp(b, 0, 255), __result.a);
+                }
+            }
+        }
+        [HarmonyPatch(typeof(Building_Door), "DoorOpen")]
+        private static class HarmonyPatches_DoorOpen
+        {
+            [HarmonyPostfix]
+            private static void Postfix(Building_Door __instance)
+            {
+                if (__instance.Open && __instance.Spawned)
+                {
+                    SmallVehicleAddons_Utility.NotifyBlockerChanged(__instance.Map.glowGrid, __instance.PositionHeld);
+                }
+            }
+        }
+        [HarmonyPatch(typeof(Building_Door), "DoorTryClose")]
+        private static class HarmonyPatches_DoorTryClose
+        {
+            [HarmonyPostfix]
+            private static void Postfix(Building_Door __instance, ref bool __result)
+            {
+                if (__result && __instance.Spawned)
+                {
+                    SmallVehicleAddons_Utility.NotifyBlockerChanged(__instance.Map.glowGrid, __instance.PositionHeld);
                 }
             }
         }

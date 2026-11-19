@@ -543,6 +543,8 @@ namespace SmallVehicleAddons
             hasCachedOperationalState = true;
             if (lightsDeployed)
             {
+                coneDirty = true;
+                RefreshConeIfNeeded();
                 if (!Props.turnOnEvents.NullOrEmpty())
                 {
                     foreach (VehicleEventDef vehicleEvent in Props.turnOnEvents)

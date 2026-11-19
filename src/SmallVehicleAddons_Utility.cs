@@ -26,6 +26,11 @@ namespace SmallVehicleAddons
         private const float defaultLightsEffectiveDistance = 16f;
         public static readonly int PlaceNearMiddleRadialCells = GenRadial.NumCellsInRadius(3f);
         private static Dictionary<GlowGrid, List<CompLights>> lightsByGrid = new Dictionary<GlowGrid, List<CompLights>>();
+        private const string ExceptionMessageStart = "[Small Vehicle Addons]: Something went wrong during ";
+        public static string ExceptionMessage(string reason, string message)
+        {
+            return ExceptionMessageStart + reason + ". Exception message: " + message;
+        }
         public static void VehiclesMassAdjust()
         {
             if (ModSettings_SmallVehicleAddons.Instance.vehiclesMassAdjust)
@@ -52,13 +57,13 @@ namespace SmallVehicleAddons
                         }
                         catch (Exception ex)
                         {
-                            Log.Error($"[Small Vehicle Addons]: Something went wrong during giving vanilla mass to vehicle of def: {item}. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                            Log.Error(ExceptionMessage($"giving vanilla mass to vehicle of def: {item}", ex.Message + "\n" + ex.StackTrace));
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("[Small Vehicle Addons]: Something went wrong during giving vanilla mass to vehicles. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                    Log.Error(ExceptionMessage("giving vanilla mass to vehicles", ex.Message + "\n" + ex.StackTrace));
                 }
             }
         }
@@ -88,13 +93,13 @@ namespace SmallVehicleAddons
                         }
                         catch (Exception ex)
                         {
-                            Log.Error($"[Small Vehicle Addons]: Something went wrong during adding fast cargo comp to vehicle of def: {item}. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                            Log.Error(ExceptionMessage($"adding fast cargo comp to vehicle of def: {item}", ex.Message + "\n" + ex.StackTrace));
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("[Small Vehicle Addons]: Something went wrong during adding fast cargo comp to vehicles. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                    Log.Error(ExceptionMessage("adding fast cargo comp to vehicles", ex.Message + "\n" + ex.StackTrace));
                 }
             }
         }
@@ -141,13 +146,13 @@ namespace SmallVehicleAddons
                         }
                         catch (Exception ex)
                         {
-                            Log.Error($"[Small Vehicle Addons]: Something went wrong during adding lights comp to vehicle of def: {item}. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                            Log.Error(ExceptionMessage($"adding lights comp to vehicle of def: {item}", ex.Message + "\n" + ex.StackTrace));
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("[Small Vehicle Addons]: Something went wrong during adding lights comp to vehicles. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                    Log.Error(ExceptionMessage("adding lights comp to vehicles", ex.Message + "\n" + ex.StackTrace));
                 }
             }
         }
@@ -194,13 +199,13 @@ namespace SmallVehicleAddons
                         }
                         catch (Exception ex)
                         {
-                            Log.Error($"[Small Vehicle Addons]: Something went wrong during adding honk comp to vehicle of def: {item}. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                            Log.Error(ExceptionMessage($"adding honk comp to vehicle of def: {item}", ex.Message + "\n" + ex.StackTrace));
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("[Small Vehicle Addons]: Something went wrong during adding honk comp to vehicles. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                    Log.Error(ExceptionMessage("adding honk comp to vehicles", ex.Message + "\n" + ex.StackTrace));
                 }
             }
         }
@@ -228,13 +233,13 @@ namespace SmallVehicleAddons
                         }
                         catch (Exception ex)
                         {
-                            Log.Error($"[Small Vehicle Addons]: Something went wrong during adding needs refillment comp to vehicle of def: {item}. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                            Log.Error(ExceptionMessage($"adding needs refillment comp to vehicle of def: {item}", ex.Message + "\n" + ex.StackTrace));
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("[Small Vehicle Addons]: Something went wrong during adding needs refillment comp to vehicles. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                    Log.Error(ExceptionMessage("adding needs refillment comp to vehicles", ex.Message + "\n" + ex.StackTrace));
                 }
             }
         }
@@ -303,7 +308,7 @@ namespace SmallVehicleAddons
             }
             catch (Exception ex)
             {
-                Log.Error("[Small Vehicle Addons]: something went wrong during GetNearbyThings. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                Log.Error(ExceptionMessage("GetNearbyThings", ex.Message + "\n" + ex.StackTrace));
             }
             return tmpThings;
         }
@@ -466,7 +471,7 @@ namespace SmallVehicleAddons
             }
             catch (Exception ex)
             {
-                Log.Error("[Small Vehicle Addons]: something went wrong during TrySatisfyPassengersNeeds. Exception message: " + ex.Message + "\n" + ex.StackTrace);
+                Log.Error(ExceptionMessage("TrySatisfyPassengersNeeds", ex.Message + "\n" + ex.StackTrace));
             }
             bool TryRefillBladder(Pawn pawn)
             {
