@@ -318,6 +318,10 @@ namespace SmallVehicleAddons
         }
         public static bool HasOperator(VehiclePawn v)
         {
+            if (v.ignition.Drafted)
+            {
+                return true;
+            }
             foreach (VehicleRoleHandler handler in v.handlers)
             {
                 if (handler.role.HandlingTypes == HandlingType.Movement && handler.RoleFulfilled)
